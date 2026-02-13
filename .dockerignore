@@ -1,0 +1,12 @@
+# Include any files or directories that you don't want to be copied to your image here
+# (e.g., local documentation, unit tests, etc.)
+
+.history
+.git
+.watchmanconfig
+.DS_Store
+node_modules/
+npm-debug.log
+docker-compose*
+.dockerignore
+Dockerfile*

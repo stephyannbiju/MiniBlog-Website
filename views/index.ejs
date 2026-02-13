@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Reflections & Insights</h2>
+            <p>A curated space for modern development and thoughtful design.</p>
+
+            <form action="/" method="GET" class="search-form">
+                <input type="text" name="search" placeholder="Search articles..." value="<%= searchQuery %>">
+                <button type="submit">Search</button>
+            </form>
+            <div class="hero-actions">
+                <a href="/create" class="btn-primary">Write a Post</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="category-filters">
+        <a href="/" class="filter-btn <%= activeCategory === 'All' ? 'active' : '' %>">All</a>
+        <% categories.forEach(cat=> { %>
+            <a href="/?category=<%= cat %>" class="filter-btn <%= activeCategory === cat ? 'active' : '' %>">
+                <%= cat %>
+            </a>
+            <% }) %>
+    </div>
+
+    <section class="posts-grid">
+        <% if (posts.length> 0) { %>
+            <% posts.forEach(post=> { %>
+                <article class="post-card">
+                    <div class="post-image-container">
+                        <div class="post-image" style="background-image: url('<%= post.image %>');"></div>
+                        <span class="post-tag">
+                            <%= post.category %>
+                        </span>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta-inline">
+                            <span class="post-date">
+                                <%= new Date(post.date).toLocaleDateString() %>
+                            </span>
+                            <span class="reading-time">☕ <%= post.readingTime %> read</span>
+                        </div>
+                        <h3 class="post-title"><a href="/post/<%= post.id %>">
+                                <%= post.title %>
+                            </a></h3>
+                        <p class="post-summary">
+                            <%= post.summary %>
+                        </p>
+                        <div class="post-footer">
+                            <span class="post-author">By <%= post.author %></span>
+                            <a href="/post/<%= post.id %>" class="read-more">Learn more &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+                <% }) %>
+                    <% } else { %>
+                        <div class="no-results">
+                            <h3>No articles found</h3>
+                            <p>Try adjusting your search or filters to find what you're looking for.</p>
+                            <a href="/" class="btn-primary">Clear all filters</a>
+                        </div>
+                        <% } %>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-card">
+            <h3>Join the Community</h3>
+            <p>Get the latest articles and insights delivered straight to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>

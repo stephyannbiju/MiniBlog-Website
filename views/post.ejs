@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+    <article class="single-post">
+        <header class="post-header"
+            style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('<%= post.image %>');">
+            <div class="header-content">
+                <span class="post-meta">
+                    <%= new Date(post.date).toLocaleDateString() %> &bull; <%= post.category %> &bull; <%=
+                                post.readingTime %> read
+                </span>
+                <h1>
+                    <%= post.title %>
+                </h1>
+                <div class="post-author-large">
+                    <img src="https://ui-avatars.com/api/?name=<%= encodeURIComponent(post.author) %>&background=random"
+                        alt="<%= post.author %>">
+                    <span>By <strong>
+                            <%= post.author %>
+                        </strong></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="post-body">
+            <p class="lead">
+                <%= post.summary %>
+            </p>
+            <div class="content">
+                <%= post.content %>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+            <div class="post-sharing">
+                <span>Share this article:</span>
+                <div class="share-links">
+                    <a href="#" class="share-icon">Twitter</a>
+                    <a href="#" class="share-icon">LinkedIn</a>
+                    <a href="#" class="share-icon">Email</a>
+                </div>
+            </div>
+
+            <div class="post-navigation">
+                <a href="/" class="back-link">&larr; Back to all articles</a>
+            </div>
+        </div>
+    </article>
+
+    <section class="suggested-posts container">
+        <h3 class="section-title">You might also like</h3>
+        <div class="posts-grid">
+            <% suggested.forEach(item=> { %>
+                <article class="post-card mini">
+                    <div class="post-image-container">
+                        <div class="post-image" style="background-image: url('<%= item.image %>');"></div>
+                    </div>
+                    <div class="post-content">
+                        <h4 class="post-title"><a href="/post/<%= item.id %>">
+                                <%= item.title %>
+                            </a></h4>
+                        <a href="/post/<%= item.id %>" class="read-more">Read &rarr;</a>
+                    </div>
+                </article>
+                <% }) %>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>

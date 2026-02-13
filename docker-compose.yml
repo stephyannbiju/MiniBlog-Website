@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1
+
+# Comments from docker init
+#
+# This file follows the 'Compose file format'
+# (https://docs.docker.com/compose/compose-file/)
+
+name: miniblog-website
+
+services:
+  server:
+    build:
+      context: .
+      target: final
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
